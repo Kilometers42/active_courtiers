@@ -385,6 +385,7 @@ accou_quick_marriage_ai_accept_modifier_actor_value = {
 			scope:actor.dynasty ?= {
 				has_dynasty_perk = ep2_activities_legacy_2
 			}
+			scope:grand_wedding_promise = yes
 		}
 		add = ep2_activities_legacy_2_grand_weddings_acceptance_boost_value
 	}
@@ -451,9 +452,9 @@ accou_quick_marriage_ai_accept_modifier_actor_value = {
 		limit = {
 			scope:actor.house ?= {
 				OR = {
-					has_house_power_parameter = increased_marriage_acceptance_1
-					has_house_power_parameter = increased_marriage_acceptance_2
-					has_house_power_parameter = increased_marriage_acceptance_3
+					has_house_aspiration_parameter = increased_marriage_acceptance_1
+					has_house_aspiration_parameter = increased_marriage_acceptance_2
+					has_house_aspiration_parameter = increased_marriage_acceptance_3
 				}
 			}
 		}
@@ -461,13 +462,13 @@ accou_quick_marriage_ai_accept_modifier_actor_value = {
 			value = 0
 			if = {
 				limit = {
-					scope:actor.house ?= { has_house_power_parameter = increased_marriage_acceptance_3 }
+					scope:actor.house ?= { has_house_aspiration_parameter = increased_marriage_acceptance_3 }
 				}
 				add = increased_marriage_acceptance_3_value
 			}
 			else_if = {
 				limit = {
-					scope:actor.house ?= { has_house_power_parameter = increased_marriage_acceptance_2 }
+					scope:actor.house ?= { has_house_aspiration_parameter = increased_marriage_acceptance_2 }
 				}
 				add = increased_marriage_acceptance_2_value
 			}
@@ -886,12 +887,12 @@ accou_quick_marriage_ai_accept_modifier_value = {
 		if = {
 			limit = {
 				scope:secondary_actor = {
-					age > 29
+					effective_age > 29
 					is_female = yes
 				}
 			}
 			add = {
-				value = scope:secondary_actor.age
+				value = scope:secondary_actor.effective_age
 				subtract = 29
 				multiply = -5.0
 			}
@@ -1118,7 +1119,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 	if = {
 		limit = {
 			scope:secondary_recipient = {
-				age > 20
+				effective_age > 20
 				OR = {
 					dynasty = scope:recipient.dynasty
 					is_close_or_extended_family_of = scope:recipient
@@ -1126,7 +1127,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 			}
 		}
 		add = {
-			value = scope:secondary_recipient.age
+			value = scope:secondary_recipient.effective_age
 			subtract = 20
 		}
 	}

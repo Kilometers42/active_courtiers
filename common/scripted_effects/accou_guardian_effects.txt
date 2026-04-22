@@ -46,6 +46,8 @@ accou_educate_child_on_accept_effect = {
 				}
 			}
 		}
+
+		accolade_ward_education_notification_effect = yes
 	}
 }
 

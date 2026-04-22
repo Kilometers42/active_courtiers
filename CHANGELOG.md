@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 0.12.0
+
+### Compatibility
+
+* Adapted to CK3 1.19.0.3.
+
 ## Version 0.11.1
 
 ### Game Rules
