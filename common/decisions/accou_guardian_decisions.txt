@@ -1,0 +1,76 @@
+﻿# Open the trait-to-education configuration UI at any point during a campaign.
+accou_configure_education_focus_decision = {
+	picture = { reference = "gfx/interface/illustrations/decisions/decision_misc.dds" }
+	desc = accou_configure_education_focus_decision_desc
+	selection_tooltip = accou_configure_education_focus_decision_tooltip
+	sort_order = 20
+	ai_check_interval = 0
+
+	is_shown = {
+		is_ai = no
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+	}
+
+	effect = {
+		trigger_event = accou_guardian.0100
+	}
+
+	ai_potential = { always = no }
+	ai_will_do = { base = 0 }
+}
+
+# Auto-accept is disabled by default. These mutually exclusive decisions let
+# each player change the preference during a campaign without a game rule.
+accou_enable_find_guardian_auto_accept_decision = {
+	picture = { reference = "gfx/interface/illustrations/decisions/decision_misc.dds" }
+	desc = accou_enable_find_guardian_auto_accept_decision_desc
+	selection_tooltip = accou_enable_find_guardian_auto_accept_decision_tooltip
+	sort_order = 21
+	ai_check_interval = 0
+
+	is_shown = {
+		is_ai = no
+		NOT = { has_variable = accou_find_guardian_auto_accept }
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+	}
+
+	effect = {
+		set_variable = {
+			name = accou_find_guardian_auto_accept
+			value = yes
+		}
+	}
+
+	ai_potential = { always = no }
+	ai_will_do = { base = 0 }
+}
+
+accou_disable_find_guardian_auto_accept_decision = {
+	picture = { reference = "gfx/interface/illustrations/decisions/decision_misc.dds" }
+	desc = accou_disable_find_guardian_auto_accept_decision_desc
+	selection_tooltip = accou_disable_find_guardian_auto_accept_decision_tooltip
+	sort_order = 21
+	ai_check_interval = 0
+
+	is_shown = {
+		is_ai = no
+		has_variable = accou_find_guardian_auto_accept
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+	}
+
+	effect = {
+		remove_variable = accou_find_guardian_auto_accept
+	}
+
+	ai_potential = { always = no }
+	ai_will_do = { base = 0 }
+}

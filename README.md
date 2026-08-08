@@ -30,11 +30,11 @@ Finally, the courtier's liege must approve the request or accept the recommendat
 
 This mod also adds a **Courtier Suggests a Guardian** event, triggered on birthdays for eligible children without guardians. A guardian candidate and suggesting courtier are selected. In this case, quality reflects effectiveness based on skills, traits, perks, faith, and culture.
 
-For convenience, the mod also adds the interactions **Ask to Find Spouse**, **Find Someone to Invite to Court**, **Find Guardian**, and **Configure Trait Education**.
+For convenience, the mod also adds the interactions **Ask to Find Spouse**, **Find Someone to Invite to Court**, and **Find Guardian**, plus mid-game decisions for guardian automation and trait education.
 
-The **Find Guardian Result** game rule can make searches started with **Find Guardian** immediately appoint the recommended guardian. Birthday-triggered guardian suggestions still open normally, so the automation does not affect the mod's other events.
+The **Enable Automatic Guardian Appointments** decision makes searches started with **Find Guardian** immediately appoint the recommended guardian. A corresponding decision disables it again at any time. Birthday-triggered guardian suggestions still open normally, so the automation does not affect the mod's other events.
 
-Education focuses can also be assigned automatically from traits. Use the **Configure Trait Education** self-interaction to search every trait currently loaded by the game, including traits from other mods. Search by the complete displayed name or internal key, select all children, boys, or girls, and map that combination to diplomacy, martial, stewardship, intrigue, or learning. Boys and girls can have different mappings for the same trait. Separate game rules provide defaults for **Genius**, **Intelligent**, **Quick**, **Bossy**, **Charming**, **Curious**, **Pensive**, and **Rowdy**, while choices made through the interaction override those defaults for the current ruler and immediately update eligible children under the player's care. The mappings are reapplied on birthdays and when **Find Guardian** is used. If a child has multiple custom-mapped traits, the deterministic priority is diplomacy, martial, stewardship, intrigue, then learning.
+Education focuses can also be assigned automatically from traits. Use the **Configure Trait Education** decision to search every trait currently loaded by the game, including traits from other mods. Search by the complete displayed name or internal key, click a result, confirm the green **Selected** readout, then choose **Continue with Selected Trait**. You can map all children, boys, or girls to diplomacy, martial, stewardship, intrigue, or learning. Boys and girls can have different mappings for the same trait. Choices are stored for the current ruler and immediately update eligible children under the player's care. The mappings can be changed or removed at any time and are reapplied on birthdays and when **Find Guardian** is used. If a child has multiple custom-mapped traits, the deterministic priority is diplomacy, martial, stewardship, intrigue, then learning.
 
 AI rulers often keep councillors or position holders with worse skills than available. To address this, the mod adds a **Courtier Jostles for Position** event, triggered when a better candidate for a councillor or court position joins the court. The candidate requests appointment, and the liege decides. AI rulers consider their opinions of both the candidate and the *incumbent*, relations, competence gap, whether the incumbent is a powerful vassal, and other factors.
 
@@ -217,7 +217,7 @@ The performance-influencing factors that can be configured via game rules are:
 
 The **Event Frequency for Players** and **Character Search Range for Players** game rules don't have any influence on the performance since there is only a single (or very few) player. They allow configuring more frequent events and wider search ranges for players than for AI rulers for a more rewarding gameplay experience.
 
-The **Find Guardian Result** and trait-based **Education Focus** rules are player-only convenience settings and do not affect AI rulers.
+The guardian automation and trait-based education decisions are player-only conveniences and do not affect AI rulers.
 
 As a recommendation, if you don't notice any performance issues, just leave the default settings. Otherwise, you may try increasing the event frequency or reducing the character search range for AI rulers.
 

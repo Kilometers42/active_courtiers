@@ -147,15 +147,27 @@
  accou_guardian_description.tutor.desc: "учитель (#V [ROOT.Char.GetSkill('learning')]#! [learning|E])"
 
 
- # Education focus configuration interaction (English fallback)
- accou_configure_education_focus_interaction: "Configure Trait Education"
- accou_configure_education_focus_interaction_desc: "Search every loaded trait and choose which education focus it should assign to boys, girls, or all children"
+ # Mid-game guardian and education decisions (English fallback)
+ accou_configure_education_focus_decision: "Configure Trait Education"
+ accou_configure_education_focus_decision_desc: "Create, change, or remove education-focus mappings for any loaded trait, with separate settings for boys and girls."
+ accou_configure_education_focus_decision_tooltip: "Open the searchable trait education configuration"
+ accou_configure_education_focus_decision_confirm: "Configure Education"
+ accou_enable_find_guardian_auto_accept_decision: "Enable Automatic Guardian Appointments"
+ accou_enable_find_guardian_auto_accept_decision_desc: "Successful searches that I start with Find Guardian will immediately appoint the recommended guardian. Birthday suggestions will still require review."
+ accou_enable_find_guardian_auto_accept_decision_tooltip: "Find Guardian results will be accepted automatically"
+ accou_enable_find_guardian_auto_accept_decision_confirm: "Enable Auto-Accept"
+ accou_disable_find_guardian_auto_accept_decision: "Disable Automatic Guardian Appointments"
+ accou_disable_find_guardian_auto_accept_decision_desc: "Successful Find Guardian searches will once again show their recommendation for my review before appointing anyone."
+ accou_disable_find_guardian_auto_accept_decision_tooltip: "Find Guardian results will require review"
+ accou_disable_find_guardian_auto_accept_decision_confirm: "Disable Auto-Accept"
 
  accou_guardian.0100.t: "Configure Trait Education"
  accou_guardian.0100.desc: "Search for any loaded trait, then select it to configure gender and education focus. This includes traits added by other mods."
  accou_guardian.0100.search: "Search"
+ accou_guardian.0100.continue: "Continue with Selected Trait"
  accou_trait_picker.search: "Search by trait name or internal key"
  accou_trait_picker.help: "Type the complete displayed name (for example, Brave) or internal key (brave). Leave the field blank to browse every trait."
+ accou_trait_picker.selected: "Selected: [GetPlayer.MakeScope.Var('accou_education_trait_being_configured').Trait.GetNameNoTooltip(GetPlayer)]"
  accou_guardian.0100.genius: "Configure Genius"
  accou_guardian.0100.intelligent: "Configure Intelligent"
  accou_guardian.0100.quick: "Configure Quick"
@@ -181,7 +193,7 @@
  accou_guardian.0101.stewardship: "Stewardship"
  accou_guardian.0101.intrigue: "Intrigue"
  accou_guardian.0101.learning: "Learning"
- accou_guardian.0101.default: "Use Game-Rule Default"
+ accou_guardian.0101.remove: "Remove Mapping"
  accou_guardian.0101.cancel: "Back"
 
 

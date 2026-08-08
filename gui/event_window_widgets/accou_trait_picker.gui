@@ -67,4 +67,11 @@ vbox = {
 			}
 		}
 	}
+
+	text_single = {
+		layoutpolicy_horizontal = expanding
+		visible = "[GetPlayer.MakeScope.Var('accou_education_trait_being_configured').IsSet]"
+		text = accou_trait_picker.selected
+		default_format = "#P"
+	}
 }

@@ -2,10 +2,10 @@
 
 ## Unreleased
 
-### Game Rules
+### Decisions
 
-* Added an option to auto-accept successful searches started through the **Find Guardian** interaction without auto-accepting birthday suggestions.
-* Added a **Configure Trait Education** self-interaction with a searchable picker for every loaded trait, including mod-added traits, and separate education mappings for all children, boys, or girls; game rules provide overridable defaults for eight common traits.
+* Added repeatable decisions to enable or disable auto-acceptance of successful searches started through the **Find Guardian** interaction without auto-accepting birthday suggestions.
+* Added a **Configure Trait Education** decision with a searchable picker for every loaded trait, including mod-added traits, and separate education mappings for all children, boys, or girls. Mappings can be changed during an existing campaign.
 
 ## Version 0.12.0
 

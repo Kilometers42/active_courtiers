@@ -207,7 +207,7 @@ accou_guardian.0001 = {
 
 		# Set alternate education focus if needed
 		scope:child = {
-			# Re-apply preferences in case the game rule changed since the birthday.
+			# Re-apply preferences in case the player changed them since the birthday.
 			if = {
 				limit = { root = { is_ai = no } }
 				accou_apply_trait_education_focus_effect = { RULER = root }
@@ -364,7 +364,7 @@ accou_guardian.0001 = {
 			if = {
 				limit = {
 					is_ai = no
-					has_game_rule = accou_find_guardian_acceptance_auto
+					has_variable = accou_find_guardian_auto_accept
 					scope:child = { has_character_flag = accou_searching_for_guardian }
 				}
 
@@ -852,7 +852,7 @@ accou_guardian.0004 = {
 	}
 }
 
-# Trait-to-focus configuration menu opened by the player self-interaction.
+# Trait-to-focus configuration menu opened by the player decision.
 accou_guardian.0100 = {
 	type = character_event
 	title = accou_guardian.0100.t
@@ -908,6 +908,13 @@ accou_guardian.0100 = {
 			}
 			trigger_event = accou_guardian.0100
 		}
+	}
+	option = {
+		name = accou_guardian.0100.continue
+		var:accou_trait_search_holder ?= { remove_localized_text = accou_trait_search }
+		remove_variable = accou_trait_search_holder
+		remove_localized_text = accou_trait_search
+		trigger_event = accou_guardian.0102
 	}
 	option = {
 		name = accou_guardian.0100.done
@@ -997,7 +1004,7 @@ accou_guardian.0101 = {
 		trigger_event = accou_guardian.0100
 	}
 	option = {
-		name = accou_guardian.0101.default
+		name = accou_guardian.0101.remove
 		accou_clear_trait_education_focus_preference_effect = yes
 		trigger_event = accou_guardian.0100
 	}

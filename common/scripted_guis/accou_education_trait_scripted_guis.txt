@@ -9,9 +9,5 @@
 			name = accou_education_trait_being_configured
 			value = scope:selected_trait
 		}
-		var:accou_trait_search_holder ?= { remove_localized_text = accou_trait_search }
-		remove_variable = accou_trait_search_holder
-		remove_localized_text = accou_trait_search
-		trigger_event = accou_guardian.0102
 	}
 }
