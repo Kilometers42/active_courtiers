@@ -207,10 +207,16 @@ accou_guardian.0001 = {
 
 		# Set alternate education focus if needed
 		scope:child = {
+			# Re-apply preferences in case the game rule changed since the birthday.
+			if = {
+				limit = { root = { is_ai = no } }
+				accou_apply_trait_education_focus_effect = { RULER = root }
+			}
 			remove_variable = accou_education_focus
 			if = {
 				limit = {
 					has_focus = education_martial
+					NOT = { accou_has_trait_education_focus_preference_trigger = yes }
 					NOT = { can_be_combatant_based_on_gender_trigger = { ARMY_OWNER = root } }
 				}
 				accou_set_alternate_education_focus_effect = yes
@@ -355,7 +361,21 @@ accou_guardian.0001 = {
 			}
 			#debug_log_scopes = yes
 
-			trigger_event = accou_guardian.0002
+			if = {
+				limit = {
+					is_ai = no
+					has_game_rule = accou_find_guardian_acceptance_auto
+					scope:child = { has_character_flag = accou_searching_for_guardian }
+				}
+
+				# Auto-accept applies only to searches started with Find Guardian.
+				accou_guardian_0001_on_accept_effect = yes
+				accou_guardian_0001_on_approve_effect = yes
+				scope:child = { remove_variable = accou_education_focus }
+			}
+			else = {
+				trigger_event = accou_guardian.0002
+			}
 		}
 		else = {
 			accou_debug_log_3_effect = {
@@ -829,5 +849,161 @@ accou_guardian.0004 = {
 			recipient = root
 			secondary_recipient = scope:child
 		}
+	}
+}
+
+# Trait-to-focus configuration menu opened by the player self-interaction.
+accou_guardian.0100 = {
+	type = character_event
+	title = accou_guardian.0100.t
+	desc = accou_guardian.0100.desc
+	theme = education
+	override_background = { reference = throne_room }
+
+	widget = {
+		gui = "accou_trait_picker"
+		container = "dynamic_birth_name"
+		controller = {
+			type = text
+			data = { key = accou_trait_search }
+		}
+		setup_scope = {
+			root = { save_scope_as = text_target }
+		}
+	}
+
+	option = {
+		name = accou_guardian.0100.search
+		random_courtier_or_guest = {
+			limit = { this != root }
+			save_scope_as = accou_trait_search_holder
+		}
+		if = {
+			limit = { NOT = { exists = scope:accou_trait_search_holder } }
+			random_vassal = {
+				save_scope_as = accou_trait_search_holder
+			}
+		}
+		if = {
+			limit = { NOT = { exists = scope:accou_trait_search_holder } }
+			capital_province = {
+				random_pool_character = {
+					province = this
+					limit = { is_alive = yes }
+					save_scope_as = accou_trait_search_holder
+				}
+			}
+		}
+		if = {
+			limit = { exists = scope:accou_trait_search_holder }
+			scope:accou_trait_search_holder = {
+				copy_localized_text = {
+					key = accou_trait_search
+					target = root
+				}
+			}
+			set_variable = {
+				name = accou_trait_search_holder
+				value = scope:accou_trait_search_holder
+			}
+			trigger_event = accou_guardian.0100
+		}
+	}
+	option = {
+		name = accou_guardian.0100.done
+		var:accou_trait_search_holder ?= { remove_localized_text = accou_trait_search }
+		remove_variable = accou_trait_search_holder
+		remove_localized_text = accou_trait_search
+		remove_variable = accou_education_trait_being_configured
+		remove_variable = accou_education_gender_being_configured
+	}
+}
+
+accou_guardian.0102 = {
+	type = character_event
+	title = accou_guardian.0102.t
+	desc = accou_guardian.0102.desc
+	theme = education
+	override_background = { reference = throne_room }
+
+	option = {
+		name = accou_guardian.0102.all
+		set_variable = { name = accou_education_gender_being_configured value = flag:all }
+		trigger_event = accou_guardian.0101
+	}
+	option = {
+		name = accou_guardian.0102.male
+		set_variable = { name = accou_education_gender_being_configured value = flag:male }
+		trigger_event = accou_guardian.0101
+	}
+	option = {
+		name = accou_guardian.0102.female
+		set_variable = { name = accou_education_gender_being_configured value = flag:female }
+		trigger_event = accou_guardian.0101
+	}
+	option = {
+		name = accou_guardian.0102.back
+		remove_variable = accou_education_trait_being_configured
+		remove_variable = accou_education_gender_being_configured
+		trigger_event = accou_guardian.0100
+	}
+}
+
+accou_guardian.0101 = {
+	type = character_event
+	title = accou_guardian.0101.t
+	desc = {
+		desc = accou_guardian.0101.trait.desc
+		desc = accou_guardian.0101.gender.desc
+		triggered_desc = {
+			trigger = { var:accou_education_gender_being_configured = flag:all }
+			desc = accou_guardian.0101.all.desc
+		}
+		triggered_desc = {
+			trigger = { var:accou_education_gender_being_configured = flag:male }
+			desc = accou_guardian.0101.male.desc
+		}
+		triggered_desc = {
+			trigger = { var:accou_education_gender_being_configured = flag:female }
+			desc = accou_guardian.0101.female.desc
+		}
+	}
+	theme = education
+	override_background = { reference = throne_room }
+
+	option = {
+		name = accou_guardian.0101.diplomacy
+		accou_set_trait_education_focus_preference_effect = { FOCUS = diplomacy }
+		trigger_event = accou_guardian.0100
+	}
+	option = {
+		name = accou_guardian.0101.martial
+		accou_set_trait_education_focus_preference_effect = { FOCUS = martial }
+		trigger_event = accou_guardian.0100
+	}
+	option = {
+		name = accou_guardian.0101.stewardship
+		accou_set_trait_education_focus_preference_effect = { FOCUS = stewardship }
+		trigger_event = accou_guardian.0100
+	}
+	option = {
+		name = accou_guardian.0101.intrigue
+		accou_set_trait_education_focus_preference_effect = { FOCUS = intrigue }
+		trigger_event = accou_guardian.0100
+	}
+	option = {
+		name = accou_guardian.0101.learning
+		accou_set_trait_education_focus_preference_effect = { FOCUS = learning }
+		trigger_event = accou_guardian.0100
+	}
+	option = {
+		name = accou_guardian.0101.default
+		accou_clear_trait_education_focus_preference_effect = yes
+		trigger_event = accou_guardian.0100
+	}
+	option = {
+		name = accou_guardian.0101.cancel
+		remove_variable = accou_education_gender_being_configured
+		trigger_event = accou_guardian.0102
 	}
 }

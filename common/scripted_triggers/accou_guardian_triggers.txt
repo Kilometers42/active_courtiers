@@ -44,6 +44,74 @@ accou_has_education_focus_trigger = {
 	}
 }
 
+# Whether the selected game-rule preference for a trait changes the focus.
+accou_trait_education_focus_rule_enabled_trigger = {
+	OR = {
+		has_game_rule = $RULE$_diplomacy
+		has_game_rule = $RULE$_martial
+		has_game_rule = $RULE$_stewardship
+		has_game_rule = $RULE$_intrigue
+		has_game_rule = $RULE$_learning
+	}
+}
+
+# Used to preserve an explicit player preference when the guardian event would
+# otherwise replace a martial focus for roleplaying reasons.
+accou_has_trait_education_focus_preference_trigger = {
+	root = { is_ai = no }
+	OR = {
+		has_variable = accou_custom_trait_focus_applied
+		AND = {
+			has_trait = intellect_good_3
+			accou_trait_education_focus_rule_enabled_trigger = {
+				RULE = accou_education_focus_genius
+			}
+		}
+		AND = {
+			has_trait = intellect_good_2
+			accou_trait_education_focus_rule_enabled_trigger = {
+				RULE = accou_education_focus_intelligent
+			}
+		}
+		AND = {
+			has_trait = intellect_good_1
+			accou_trait_education_focus_rule_enabled_trigger = {
+				RULE = accou_education_focus_quick
+			}
+		}
+		AND = {
+			has_trait = bossy
+			accou_trait_education_focus_rule_enabled_trigger = {
+				RULE = accou_education_focus_bossy
+			}
+		}
+		AND = {
+			has_trait = charming
+			accou_trait_education_focus_rule_enabled_trigger = {
+				RULE = accou_education_focus_charming
+			}
+		}
+		AND = {
+			has_trait = curious
+			accou_trait_education_focus_rule_enabled_trigger = {
+				RULE = accou_education_focus_curious
+			}
+		}
+		AND = {
+			has_trait = pensive
+			accou_trait_education_focus_rule_enabled_trigger = {
+				RULE = accou_education_focus_pensive
+			}
+		}
+		AND = {
+			has_trait = rowdy
+			accou_trait_education_focus_rule_enabled_trigger = {
+				RULE = accou_education_focus_rowdy
+			}
+		}
+	}
+}
+
 accou_is_innovation_knighthood_better_guardians_trigger = {
 	always = yes
 }

@@ -2,7 +2,39 @@
 # tested after age has increased
 on_birthday = {
 	on_actions = {
+		accou_education_focus_child
 		accou_guardian_child
+	}
+}
+
+# Apply player education preferences independently of guardian eligibility, so
+# children who already have guardians still receive their configured focus.
+accou_education_focus_child = {
+	trigger = {
+		is_adult = no
+		OR = {
+			is_courtier = yes
+			is_hostage = yes
+		}
+		age >= childhood_education_start_age
+	}
+	effect = {
+		if = {
+			limit = { exists = warden }
+			warden = { save_temporary_scope_as = education_focus_ruler }
+		}
+		else_if = {
+			limit = { exists = liege }
+			liege = { save_temporary_scope_as = education_focus_ruler }
+		}
+
+		if = {
+			limit = {
+				exists = scope:education_focus_ruler
+				scope:education_focus_ruler = { is_ai = no }
+			}
+			accou_apply_trait_education_focus_effect = { RULER = scope:education_focus_ruler }
+		}
 	}
 }
 

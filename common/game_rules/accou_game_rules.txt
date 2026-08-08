@@ -321,3 +321,110 @@ accou_marriage_ai_acceptance_check = {
 		flag = GG_can_change_rule
 	}
 }
+
+accou_find_guardian_acceptance = {
+	categories = {
+		accou_active_courtiers tweaks
+	}
+
+	default = accou_find_guardian_acceptance_review
+
+	accou_find_guardian_acceptance_review = {
+		flag = GG_can_change_rule
+	}
+
+	accou_find_guardian_acceptance_auto = {
+		flag = GG_can_change_rule
+	}
+}
+
+# Player education-focus preferences. These are applied on birthdays and when
+# the Find Guardian interaction is used. More specific intellect traits take
+# precedence over childhood traits in accou_apply_trait_education_focus_effect.
+accou_education_focus_genius = {
+	categories = { accou_active_courtiers tweaks }
+	default = accou_education_focus_genius_keep
+	accou_education_focus_genius_keep = { flag = GG_can_change_rule }
+	accou_education_focus_genius_diplomacy = { flag = GG_can_change_rule }
+	accou_education_focus_genius_martial = { flag = GG_can_change_rule }
+	accou_education_focus_genius_stewardship = { flag = GG_can_change_rule }
+	accou_education_focus_genius_intrigue = { flag = GG_can_change_rule }
+	accou_education_focus_genius_learning = { flag = GG_can_change_rule }
+}
+
+accou_education_focus_intelligent = {
+	categories = { accou_active_courtiers tweaks }
+	default = accou_education_focus_intelligent_keep
+	accou_education_focus_intelligent_keep = { flag = GG_can_change_rule }
+	accou_education_focus_intelligent_diplomacy = { flag = GG_can_change_rule }
+	accou_education_focus_intelligent_martial = { flag = GG_can_change_rule }
+	accou_education_focus_intelligent_stewardship = { flag = GG_can_change_rule }
+	accou_education_focus_intelligent_intrigue = { flag = GG_can_change_rule }
+	accou_education_focus_intelligent_learning = { flag = GG_can_change_rule }
+}
+
+accou_education_focus_quick = {
+	categories = { accou_active_courtiers tweaks }
+	default = accou_education_focus_quick_keep
+	accou_education_focus_quick_keep = { flag = GG_can_change_rule }
+	accou_education_focus_quick_diplomacy = { flag = GG_can_change_rule }
+	accou_education_focus_quick_martial = { flag = GG_can_change_rule }
+	accou_education_focus_quick_stewardship = { flag = GG_can_change_rule }
+	accou_education_focus_quick_intrigue = { flag = GG_can_change_rule }
+	accou_education_focus_quick_learning = { flag = GG_can_change_rule }
+}
+
+accou_education_focus_bossy = {
+	categories = { accou_active_courtiers tweaks }
+	default = accou_education_focus_bossy_keep
+	accou_education_focus_bossy_keep = { flag = GG_can_change_rule }
+	accou_education_focus_bossy_diplomacy = { flag = GG_can_change_rule }
+	accou_education_focus_bossy_martial = { flag = GG_can_change_rule }
+	accou_education_focus_bossy_stewardship = { flag = GG_can_change_rule }
+	accou_education_focus_bossy_intrigue = { flag = GG_can_change_rule }
+	accou_education_focus_bossy_learning = { flag = GG_can_change_rule }
+}
+
+accou_education_focus_charming = {
+	categories = { accou_active_courtiers tweaks }
+	default = accou_education_focus_charming_keep
+	accou_education_focus_charming_keep = { flag = GG_can_change_rule }
+	accou_education_focus_charming_diplomacy = { flag = GG_can_change_rule }
+	accou_education_focus_charming_martial = { flag = GG_can_change_rule }
+	accou_education_focus_charming_stewardship = { flag = GG_can_change_rule }
+	accou_education_focus_charming_intrigue = { flag = GG_can_change_rule }
+	accou_education_focus_charming_learning = { flag = GG_can_change_rule }
+}
+
+accou_education_focus_curious = {
+	categories = { accou_active_courtiers tweaks }
+	default = accou_education_focus_curious_keep
+	accou_education_focus_curious_keep = { flag = GG_can_change_rule }
+	accou_education_focus_curious_diplomacy = { flag = GG_can_change_rule }
+	accou_education_focus_curious_martial = { flag = GG_can_change_rule }
+	accou_education_focus_curious_stewardship = { flag = GG_can_change_rule }
+	accou_education_focus_curious_intrigue = { flag = GG_can_change_rule }
+	accou_education_focus_curious_learning = { flag = GG_can_change_rule }
+}
+
+accou_education_focus_pensive = {
+	categories = { accou_active_courtiers tweaks }
+	default = accou_education_focus_pensive_keep
+	accou_education_focus_pensive_keep = { flag = GG_can_change_rule }
+	accou_education_focus_pensive_diplomacy = { flag = GG_can_change_rule }
+	accou_education_focus_pensive_martial = { flag = GG_can_change_rule }
+	accou_education_focus_pensive_stewardship = { flag = GG_can_change_rule }
+	accou_education_focus_pensive_intrigue = { flag = GG_can_change_rule }
+	accou_education_focus_pensive_learning = { flag = GG_can_change_rule }
+}
+
+accou_education_focus_rowdy = {
+	categories = { accou_active_courtiers tweaks }
+	default = accou_education_focus_rowdy_keep
+	accou_education_focus_rowdy_keep = { flag = GG_can_change_rule }
+	accou_education_focus_rowdy_diplomacy = { flag = GG_can_change_rule }
+	accou_education_focus_rowdy_martial = { flag = GG_can_change_rule }
+	accou_education_focus_rowdy_stewardship = { flag = GG_can_change_rule }
+	accou_education_focus_rowdy_intrigue = { flag = GG_can_change_rule }
+	accou_education_focus_rowdy_learning = { flag = GG_can_change_rule }
+}

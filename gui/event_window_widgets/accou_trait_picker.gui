@@ -1,0 +1,70 @@
+vbox = {
+	name = "accou_trait_picker"
+	layoutpolicy_horizontal = expanding
+	min_width = 560
+	max_height = 390
+	margin = { 10 0 }
+	spacing = 8
+
+	editbox_standard_with_label = {
+		layoutpolicy_horizontal = expanding
+		blockoverride "editbox_properties" {
+			name = "enter_text"
+			focus_on_visible = yes
+			ontextedited = "[EventWindowWidgetEnterText.OnEdit]"
+		}
+		blockoverride "editbox_label" {
+			text = accou_trait_picker.search
+		}
+	}
+
+	text_single = {
+		layoutpolicy_horizontal = expanding
+		text = accou_trait_picker.help
+		default_format = "#weak"
+	}
+
+	scrollbox = {
+		layoutpolicy_horizontal = expanding
+		min_height = 135
+		max_height = 135
+
+		blockoverride "scrollbox_content" {
+			vbox = {
+				layoutpolicy_horizontal = expanding
+				datamodel = "[GetTraits]"
+
+				item = {
+					button_standard_list = {
+						layoutpolicy_horizontal = expanding
+						size = { 520 42 }
+						visible = "[Or(Not(GetPlayer.MakeScope.Var('accou_trait_search_holder').IsSet), Or(EqualTo_string(Trait.GetKey, GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')), EqualTo_string(Trait.GetNameNoTooltip(GetPlayer), GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search'))))]"
+						onclick = "[GetScriptedGui('accou_select_education_trait').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('selected_trait', Trait.MakeScope).End)]"
+
+						icon = {
+							parentanchor = left|vcenter
+							position = { 8 0 }
+							size = { 34 34 }
+							texture = "[Trait.GetIcon(GetPlayer)]"
+						}
+						text_single = {
+							parentanchor = left|vcenter
+							position = { 52 0 }
+							min_width = 260
+							text = "[Trait.GetNameNoTooltip(GetPlayer)]"
+							using = Font_Size_Medium
+						}
+						text_single = {
+							parentanchor = right|vcenter
+							position = { -10 0 }
+							max_width = 190
+							text = "[Trait.GetKey]"
+							default_format = "#weak"
+							align = right|nobaseline
+						}
+					}
+				}
+			}
+		}
+	}
+}

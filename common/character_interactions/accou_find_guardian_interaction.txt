@@ -60,6 +60,9 @@ accou_find_guardian_interaction = {
 
 	on_accept = {
 		scope:recipient = {
+			# Apply any player-configured trait preference before selecting a guardian.
+			accou_apply_trait_education_focus_effect = { RULER = scope:actor }
+
 			add_character_flag = {
 				flag = accou_searching_for_guardian
 				days = 10

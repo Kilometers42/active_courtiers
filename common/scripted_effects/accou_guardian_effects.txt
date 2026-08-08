@@ -71,6 +71,166 @@ accou_set_alternate_education_focus_effect = {
 	}
 }
 
+# Apply one of the original eight trait game-rule defaults. Arbitrary in-game
+# mappings are handled first by accou_apply_custom_trait_focus_list_effect.
+accou_apply_education_focus_preference_effect = {
+	if = {
+		limit = { has_game_rule = $RULE$_diplomacy }
+		set_focus = education_diplomacy
+	}
+	else_if = {
+		limit = { has_game_rule = $RULE$_martial }
+		set_focus = education_martial
+	}
+	else_if = {
+		limit = { has_game_rule = $RULE$_stewardship }
+		set_focus = education_stewardship
+	}
+	else_if = {
+		limit = { has_game_rule = $RULE$_intrigue }
+		set_focus = education_intrigue
+	}
+	else_if = {
+		limit = { has_game_rule = $RULE$_learning }
+		set_focus = education_learning
+	}
+}
+
+# Apply one trait's gender-specific mapping. Calls are ordered in
+# accou_apply_trait_education_focus_effect so higher-priority traits win.
+accou_apply_single_trait_education_focus_rule_effect = {
+	if = {
+		limit = { has_trait = $TRAIT$ }
+		if = {
+			limit = { is_female = yes }
+			accou_apply_education_focus_preference_effect = {
+				RULE = $RULE$
+			}
+		}
+		else = {
+			accou_apply_education_focus_preference_effect = {
+				RULE = $RULE$
+			}
+		}
+	}
+}
+
+# Apply an arbitrary trait mapping stored in one of the ruler's focus lists.
+accou_apply_custom_trait_focus_list_effect = {
+	if = {
+		limit = {
+			NOT = { has_variable = accou_custom_trait_focus_applied }
+			$RULER$ = {
+				any_in_list = {
+					variable = accou_education_focus_$FOCUS$_$GENDER$_traits
+					scope:accou_education_child = { has_trait = prev }
+				}
+			}
+		}
+		set_focus = education_$FOCUS$
+		set_variable = {
+			name = accou_custom_trait_focus_applied
+			value = yes
+			days = 1
+		}
+	}
+}
+
+# Apply player-configured preferences. Arbitrary mappings take priority. If
+# several mapped traits match, focus order is Diplomacy, Martial, Stewardship,
+# Intrigue, then Learning. The original eight game-rule mappings remain the
+# fallback for saves and players that have not configured an override.
+accou_apply_trait_education_focus_effect = {
+	save_temporary_scope_as = accou_education_child
+	remove_variable = accou_custom_trait_focus_applied
+	if = {
+		limit = { is_female = yes }
+		accou_apply_custom_trait_focus_list_effect = { RULER = $RULER$ GENDER = female FOCUS = diplomacy }
+		accou_apply_custom_trait_focus_list_effect = { RULER = $RULER$ GENDER = female FOCUS = martial }
+		accou_apply_custom_trait_focus_list_effect = { RULER = $RULER$ GENDER = female FOCUS = stewardship }
+		accou_apply_custom_trait_focus_list_effect = { RULER = $RULER$ GENDER = female FOCUS = intrigue }
+		accou_apply_custom_trait_focus_list_effect = { RULER = $RULER$ GENDER = female FOCUS = learning }
+	}
+	else = {
+		accou_apply_custom_trait_focus_list_effect = { RULER = $RULER$ GENDER = male FOCUS = diplomacy }
+		accou_apply_custom_trait_focus_list_effect = { RULER = $RULER$ GENDER = male FOCUS = martial }
+		accou_apply_custom_trait_focus_list_effect = { RULER = $RULER$ GENDER = male FOCUS = stewardship }
+		accou_apply_custom_trait_focus_list_effect = { RULER = $RULER$ GENDER = male FOCUS = intrigue }
+		accou_apply_custom_trait_focus_list_effect = { RULER = $RULER$ GENDER = male FOCUS = learning }
+	}
+
+	if = {
+		limit = { NOT = { has_variable = accou_custom_trait_focus_applied } }
+		accou_apply_single_trait_education_focus_rule_effect = { TRAIT = bossy RULE = accou_education_focus_bossy }
+		accou_apply_single_trait_education_focus_rule_effect = { TRAIT = charming RULE = accou_education_focus_charming }
+		accou_apply_single_trait_education_focus_rule_effect = { TRAIT = curious RULE = accou_education_focus_curious }
+		accou_apply_single_trait_education_focus_rule_effect = { TRAIT = pensive RULE = accou_education_focus_pensive }
+		accou_apply_single_trait_education_focus_rule_effect = { TRAIT = rowdy RULE = accou_education_focus_rowdy }
+		accou_apply_single_trait_education_focus_rule_effect = { TRAIT = intellect_good_1 RULE = accou_education_focus_quick }
+		accou_apply_single_trait_education_focus_rule_effect = { TRAIT = intellect_good_2 RULE = accou_education_focus_intelligent }
+		accou_apply_single_trait_education_focus_rule_effect = { TRAIT = intellect_good_3 RULE = accou_education_focus_genius }
+	}
+}
+
+# Remove the selected trait from every focus list for one gender.
+accou_remove_trait_from_focus_lists_effect = {
+	remove_list_variable = { name = accou_education_focus_diplomacy_$GENDER$_traits target = var:accou_education_trait_being_configured }
+	remove_list_variable = { name = accou_education_focus_martial_$GENDER$_traits target = var:accou_education_trait_being_configured }
+	remove_list_variable = { name = accou_education_focus_stewardship_$GENDER$_traits target = var:accou_education_trait_being_configured }
+	remove_list_variable = { name = accou_education_focus_intrigue_$GENDER$_traits target = var:accou_education_trait_being_configured }
+	remove_list_variable = { name = accou_education_focus_learning_$GENDER$_traits target = var:accou_education_trait_being_configured }
+}
+
+# Save a focus selected through the in-game configuration interaction.
+accou_set_trait_education_focus_preference_effect = {
+	if = {
+		limit = { OR = { var:accou_education_gender_being_configured = flag:all var:accou_education_gender_being_configured = flag:male } }
+		accou_remove_trait_from_focus_lists_effect = { GENDER = male }
+		add_to_variable_list = { name = accou_education_focus_$FOCUS$_male_traits target = var:accou_education_trait_being_configured }
+	}
+	if = {
+		limit = { OR = { var:accou_education_gender_being_configured = flag:all var:accou_education_gender_being_configured = flag:female } }
+		accou_remove_trait_from_focus_lists_effect = { GENDER = female }
+		add_to_variable_list = { name = accou_education_focus_$FOCUS$_female_traits target = var:accou_education_trait_being_configured }
+	}
+	remove_variable = accou_education_trait_being_configured
+	remove_variable = accou_education_gender_being_configured
+	accou_apply_education_focus_preferences_to_children_effect = yes
+}
+
+# Clear an in-game override so the corresponding game-rule default is used.
+accou_clear_trait_education_focus_preference_effect = {
+	if = {
+		limit = { OR = { var:accou_education_gender_being_configured = flag:all var:accou_education_gender_being_configured = flag:male } }
+		accou_remove_trait_from_focus_lists_effect = { GENDER = male }
+	}
+	if = {
+		limit = { OR = { var:accou_education_gender_being_configured = flag:all var:accou_education_gender_being_configured = flag:female } }
+		accou_remove_trait_from_focus_lists_effect = { GENDER = female }
+	}
+	remove_variable = accou_education_trait_being_configured
+	remove_variable = accou_education_gender_being_configured
+	accou_apply_education_focus_preferences_to_children_effect = yes
+}
+
+# Apply changed preferences immediately instead of waiting for birthdays.
+accou_apply_education_focus_preferences_to_children_effect = {
+	every_courtier = {
+		limit = {
+			is_adult = no
+			age >= childhood_education_start_age
+		}
+		accou_apply_trait_education_focus_effect = { RULER = root }
+	}
+	every_warden_hostage = {
+		limit = {
+			is_adult = no
+			age >= childhood_education_start_age
+		}
+		accou_apply_trait_education_focus_effect = { RULER = root }
+	}
+}
+
 accou_change_education_focus_effect = {
 	if = {
 		limit = { has_variable = accou_education_focus }
