@@ -166,7 +166,6 @@
  accou_guardian.0100.search: "Search"
  accou_trait_picker.search: "Search by trait name or internal key"
  accou_trait_search_default: ""
- accou_trait_picker.help: "Type the complete displayed name (for example, Brave) or internal key (brave). Leave the field blank to browse every trait."
  accou_guardian.0100.genius: "Configure Genius"
  accou_guardian.0100.intelligent: "Configure Intelligent"
  accou_guardian.0100.quick: "Configure Quick"
