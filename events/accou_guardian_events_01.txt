@@ -865,7 +865,10 @@ accou_guardian.0100 = {
 		container = "dynamic_birth_name"
 		controller = {
 			type = text
-			data = { key = accou_trait_search }
+			data = {
+				key = accou_trait_search
+				default = accou_trait_search_default
+			}
 		}
 		setup_scope = {
 			root = { save_scope_as = text_target }
@@ -874,47 +877,46 @@ accou_guardian.0100 = {
 
 	option = {
 		name = accou_guardian.0100.search
-		random_courtier_or_guest = {
-			limit = { this != root }
-			save_scope_as = accou_trait_search_holder
-		}
 		if = {
-			limit = { NOT = { exists = scope:accou_trait_search_holder } }
-			random_vassal = {
+			limit = { exists = var:accou_education_trait_being_configured }
+			trigger_event = accou_guardian.0102
+		}
+		else = {
+			random_courtier_or_guest = {
+				limit = { this != root }
 				save_scope_as = accou_trait_search_holder
 			}
-		}
-		if = {
-			limit = { NOT = { exists = scope:accou_trait_search_holder } }
-			capital_province = {
-				random_pool_character = {
-					province = this
-					limit = { is_alive = yes }
+			if = {
+				limit = { NOT = { exists = scope:accou_trait_search_holder } }
+				random_vassal = {
 					save_scope_as = accou_trait_search_holder
 				}
 			}
-		}
-		if = {
-			limit = { exists = scope:accou_trait_search_holder }
-			scope:accou_trait_search_holder = {
-				copy_localized_text = {
-					key = accou_trait_search
-					target = root
+			if = {
+				limit = { NOT = { exists = scope:accou_trait_search_holder } }
+				capital_province = {
+					random_pool_character = {
+						province = this
+						limit = { is_alive = yes }
+						save_scope_as = accou_trait_search_holder
+					}
 				}
 			}
-			set_variable = {
-				name = accou_trait_search_holder
-				value = scope:accou_trait_search_holder
+			if = {
+				limit = { exists = scope:accou_trait_search_holder }
+				scope:accou_trait_search_holder = {
+					copy_localized_text = {
+						key = accou_trait_search
+						target = root
+					}
+				}
+				set_variable = {
+					name = accou_trait_search_holder
+					value = scope:accou_trait_search_holder
+				}
+				trigger_event = accou_guardian.0100
 			}
-			trigger_event = accou_guardian.0100
 		}
-	}
-	option = {
-		name = accou_guardian.0100.continue
-		var:accou_trait_search_holder ?= { remove_localized_text = accou_trait_search }
-		remove_variable = accou_trait_search_holder
-		remove_localized_text = accou_trait_search
-		trigger_event = accou_guardian.0102
 	}
 	option = {
 		name = accou_guardian.0100.done
