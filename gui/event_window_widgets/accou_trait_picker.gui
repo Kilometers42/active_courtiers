@@ -2,19 +2,24 @@ vbox = {
 	name = "accou_trait_picker"
 	layoutpolicy_horizontal = expanding
 	layoutpolicy_vertical = shrinking
-	min_width = 560
+	min_width = 940
 	margin = { 10 0 }
 	spacing = 8
 
-	editbox_standard_with_label = {
+	hbox = {
 		layoutpolicy_horizontal = expanding
-		blockoverride "editbox_properties" {
-			name = "enter_text"
-			focus_on_visible = yes
-			ontextedited = "[EventWindowWidgetEnterText.OnEdit]"
-		}
-		blockoverride "editbox_label" {
-			text = accou_trait_picker.search
+		margin = { 190 0 }
+
+		editbox_standard_with_label = {
+			layoutpolicy_horizontal = expanding
+			blockoverride "editbox_properties" {
+				name = "enter_text"
+				focus_on_visible = yes
+				ontextedited = "[EventWindowWidgetEnterText.OnEdit]"
+			}
+			blockoverride "editbox_label" {
+				text = accou_trait_picker.search
+			}
 		}
 	}
 
@@ -30,28 +35,28 @@ vbox = {
 
 				item = {
 					fixedgridbox = {
-						addcolumn = 520
-						addrow = 34
+						addcolumn = 900
+						addrow = 42
 						visible = "[Or(Not(GetPlayer.MakeScope.Var('accou_trait_search_holder').IsSet), Or(EqualTo_string(Trait.GetKey, GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')), Or(EqualTo_string(Trait.GetNameNoTooltip(GetPlayer), GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')), Or(EqualTo_string(Trait.GetKey, Localize(Concatenate('accou_trait_alias_01_', GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')))), Or(EqualTo_string(Trait.GetKey, Localize(Concatenate('accou_trait_alias_02_', GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')))), Or(EqualTo_string(Trait.GetKey, Localize(Concatenate('accou_trait_alias_03_', GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')))), Or(EqualTo_string(Trait.GetKey, Localize(Concatenate('accou_trait_alias_04_', GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')))), Or(EqualTo_string(Trait.GetKey, Localize(Concatenate('accou_trait_alias_05_', GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')))), Or(EqualTo_string(Trait.GetKey, Localize(Concatenate('accou_trait_alias_06_', GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')))), Or(EqualTo_string(Trait.GetKey, Localize(Concatenate('accou_trait_alias_07_', GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')))), EqualTo_string(Trait.GetKey, Localize(Concatenate('accou_trait_alias_08_', GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search'))))))))))))))]"
 						datamodel = "[DataModelFirst(EventWindowData.GetOptions, '(int32)1')]"
 
 						item = {
 							button_standard_list = {
 								layoutpolicy_horizontal = expanding
-								size = { 520 34 }
+								size = { 900 42 }
 								onclick = "[GetScriptedGui('accou_select_education_trait').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('selected_trait', Trait.MakeScope).End)]"
 								onclick = "[EventOption.Select]"
 
 								icon = {
 									parentanchor = left|vcenter
-									position = { 6 0 }
-									size = { 26 26 }
+									position = { 8 0 }
+									size = { 34 34 }
 									texture = "[Trait.GetIcon(GetPlayer)]"
 								}
 								text_single = {
 									parentanchor = left|vcenter
-									position = { 40 0 }
-									min_width = 460
+									position = { 52 0 }
+									min_width = 830
 									text = "[Trait.GetNameNoTooltip(GetPlayer)]"
 									using = Font_Size_Medium
 								}
