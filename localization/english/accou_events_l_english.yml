@@ -162,9 +162,9 @@
  accou_disable_find_guardian_auto_accept_decision_confirm: "Disable Auto-Accept"
 
  accou_guardian.0100.t: "Configure Trait Education"
- accou_guardian.0100.desc: "Search for any loaded trait, then select it to configure gender and education focus. This includes traits added by other mods."
- accou_guardian.0100.search: "Search"
- accou_trait_picker.search: "Search by trait name or internal key"
+ accou_guardian.0100.desc: ""
+ accou_guardian.0100.search: ""
+ accou_trait_picker.search: "Search traits..."
  accou_trait_search_default: ""
  accou_guardian.0100.genius: "Configure Genius"
  accou_guardian.0100.intelligent: "Configure Intelligent"

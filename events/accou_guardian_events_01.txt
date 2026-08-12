@@ -159,7 +159,14 @@ accou_guardian.0001 = {
 	}
 
 	trigger = {
-		has_game_rule = accou_guardian_events_enabled
+		# Explicit Find Guardian requests must work even when the recurring
+		# birthday guardian-suggestion rule is disabled.
+		OR = {
+			has_game_rule = accou_guardian_events_enabled
+			scope:child = {
+				var:accou_find_guardian_requested_by = root
+			}
+		}
 		accou_guardian_0001_valid_liege_trigger = yes
 
 		trigger_if = {
@@ -365,13 +372,18 @@ accou_guardian.0001 = {
 				limit = {
 					is_ai = no
 					has_variable = accou_find_guardian_auto_accept
-					scope:child = { has_character_flag = accou_searching_for_guardian }
+					scope:child = {
+						var:accou_find_guardian_requested_by = root
+					}
 				}
 
 				# Auto-accept applies only to searches started with Find Guardian.
 				accou_guardian_0001_on_accept_effect = yes
 				accou_guardian_0001_on_approve_effect = yes
-				scope:child = { remove_variable = accou_education_focus }
+				scope:child = {
+					remove_variable = accou_education_focus
+					remove_variable = accou_find_guardian_requested_by
+				}
 			}
 			else = {
 				trigger_event = accou_guardian.0002
@@ -387,6 +399,7 @@ accou_guardian.0001 = {
 			#debug_log_scopes = yes
 
 			scope:child ?= {
+				remove_variable = accou_find_guardian_requested_by
 				add_character_flag = {
 					flag = accou_guardian_0001_failed
 					years = 1

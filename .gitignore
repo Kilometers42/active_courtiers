@@ -3,3 +3,4 @@ images/
 .DS_Store
 .~lock.*
 ck3-tiger.out
+.cua_runtime/

@@ -4,5 +4,5 @@ tags={
 	"Character Interactions"
 	"Events"
 }
-name="Active Courtiers"
+name="Active Courtiers (Codex Build)"
 supported_version="1.19.*"

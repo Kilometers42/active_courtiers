@@ -67,6 +67,11 @@ accou_find_guardian_interaction = {
 				flag = accou_searching_for_guardian
 				days = 10
 			}
+			set_variable = {
+				name = accou_find_guardian_requested_by
+				value = scope:actor
+				days = 10
+			}
 			save_scope_as = child
 		}
 
