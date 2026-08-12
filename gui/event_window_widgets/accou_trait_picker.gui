@@ -9,6 +9,7 @@ vbox = {
 
 	hbox = {
 		layoutpolicy_horizontal = expanding
+		position = { 0 -90 }
 		margin_left = 90
 		margin_right = 370
 
@@ -25,44 +26,52 @@ vbox = {
 		}
 	}
 
-	scrollbox = {
+	hbox = {
 		layoutpolicy_horizontal = expanding
-		min_height = 135
-		max_height = 135
+		position = { 0 -90 }
+		margin_left = -105
+		margin_right = 205
 
-		blockoverride "scrollbox_content" {
-			vbox = {
-				layoutpolicy_horizontal = expanding
-				datamodel = "[GetTraits]"
+		scrollbox = {
+			min_width = 900
+			max_width = 900
+			min_height = 90
+			max_height = 90
 
-				item = {
-					fixedgridbox = {
-						addcolumn = 1000
-						addrow = 42
-						visible = "[Or(Not(GetPlayer.MakeScope.Var('accou_trait_search_holder').IsSet), Or(EqualTo_string(Trait.GetKey, GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')), Or(EqualTo_string(Trait.GetNameNoTooltip(GetPlayer), GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')), Or(EqualTo_string(Trait.GetKey, Localize(Concatenate('accou_trait_alias_01_', GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')))), Or(EqualTo_string(Trait.GetKey, Localize(Concatenate('accou_trait_alias_02_', GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')))), Or(EqualTo_string(Trait.GetKey, Localize(Concatenate('accou_trait_alias_03_', GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')))), Or(EqualTo_string(Trait.GetKey, Localize(Concatenate('accou_trait_alias_04_', GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')))), Or(EqualTo_string(Trait.GetKey, Localize(Concatenate('accou_trait_alias_05_', GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')))), Or(EqualTo_string(Trait.GetKey, Localize(Concatenate('accou_trait_alias_06_', GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')))), Or(EqualTo_string(Trait.GetKey, Localize(Concatenate('accou_trait_alias_07_', GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')))), EqualTo_string(Trait.GetKey, Localize(Concatenate('accou_trait_alias_08_', GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search'))))))))))))))]"
-						datamodel = "[DataModelFirst(EventWindowData.GetOptions, '(int32)1')]"
+			blockoverride "scrollbox_content" {
+				vbox = {
+					layoutpolicy_horizontal = expanding
+					datamodel = "[GetTraits]"
 
-						item = {
-							button_standard_list = {
-								layoutpolicy_horizontal = expanding
-								size = { 1000 42 }
-								shortcut = confirm
-								shortcut = confirm_2
-								onclick = "[GetScriptedGui('accou_select_education_trait').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('selected_trait', Trait.MakeScope).End)]"
-								onclick = "[EventOption.Select]"
+					item = {
+						fixedgridbox = {
+							addcolumn = 880
+							addrow = 42
+							visible = "[Or(Not(GetPlayer.MakeScope.Var('accou_trait_search_holder').IsSet), Or(EqualTo_string(Trait.GetKey, GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')), Or(EqualTo_string(Trait.GetNameNoTooltip(GetPlayer), GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')), Or(EqualTo_string(Trait.GetKey, Localize(Concatenate('accou_trait_alias_01_', GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')))), Or(EqualTo_string(Trait.GetKey, Localize(Concatenate('accou_trait_alias_02_', GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')))), Or(EqualTo_string(Trait.GetKey, Localize(Concatenate('accou_trait_alias_03_', GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')))), Or(EqualTo_string(Trait.GetKey, Localize(Concatenate('accou_trait_alias_04_', GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')))), Or(EqualTo_string(Trait.GetKey, Localize(Concatenate('accou_trait_alias_05_', GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')))), Or(EqualTo_string(Trait.GetKey, Localize(Concatenate('accou_trait_alias_06_', GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')))), Or(EqualTo_string(Trait.GetKey, Localize(Concatenate('accou_trait_alias_07_', GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search')))), EqualTo_string(Trait.GetKey, Localize(Concatenate('accou_trait_alias_08_', GetPlayer.MakeScope.Var('accou_trait_search_holder').Char.GetLocalizedText('accou_trait_search'))))))))))))))]"
+							datamodel = "[DataModelFirst(EventWindowData.GetOptions, '(int32)1')]"
 
-								icon = {
-									parentanchor = left|vcenter
-									position = { 8 0 }
-									size = { 34 34 }
-									texture = "[Trait.GetIcon(GetPlayer)]"
-								}
-								text_single = {
-									parentanchor = left|vcenter
-									position = { 52 0 }
-									min_width = 930
-									text = "[Trait.GetNameNoTooltip(GetPlayer)]"
-									using = Font_Size_Medium
+							item = {
+								button_standard_list = {
+									layoutpolicy_horizontal = expanding
+									size = { 880 42 }
+									shortcut = confirm
+									shortcut = confirm_2
+									onclick = "[GetScriptedGui('accou_select_education_trait').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('selected_trait', Trait.MakeScope).End)]"
+									onclick = "[EventOption.Select]"
+
+									icon = {
+										parentanchor = left|vcenter
+										position = { 8 0 }
+										size = { 34 34 }
+										texture = "[Trait.GetIcon(GetPlayer)]"
+									}
+									text_single = {
+										parentanchor = left|vcenter
+										position = { 52 0 }
+										min_width = 810
+										text = "[Trait.GetNameNoTooltip(GetPlayer)]"
+										using = Font_Size_Medium
+									}
 								}
 							}
 						}

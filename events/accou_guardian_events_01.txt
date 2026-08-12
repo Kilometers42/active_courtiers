@@ -372,12 +372,10 @@ accou_guardian.0001 = {
 				limit = {
 					is_ai = no
 					has_variable = accou_find_guardian_auto_accept
-					scope:child = {
-						var:accou_find_guardian_requested_by = root
-					}
 				}
 
-				# Auto-accept applies only to searches started with Find Guardian.
+				# The player's no-alert preference silently accepts all successful
+				# guardian suggestions, including explicit Find Guardian searches.
 				accou_guardian_0001_on_accept_effect = yes
 				accou_guardian_0001_on_approve_effect = yes
 				scope:child = {
@@ -408,13 +406,17 @@ accou_guardian.0001 = {
 
 			if = {
 				limit = {
+					NOT = { has_variable = accou_find_guardian_auto_accept }
 					scope:child ?= {
 						has_character_flag = accou_searching_for_guardian
 					}
 				}
 				trigger_event = accou_guardian.0004
 			}
-			else = {
+			else_if = {
+				limit = {
+					NOT = { has_variable = accou_find_guardian_auto_accept }
+				}
 				send_interface_message = {
 					type = accou_search_failed_neutral
 					title = accou_guardian_0001_failed_title
